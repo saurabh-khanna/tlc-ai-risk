@@ -40,6 +40,7 @@ def calculate_score(responses):
     return total_score
 
 with st.expander("TLC genAI Risk Assessment", expanded=True):
+    st.write("&nbsp;")
     survey = ss.StreamlitSurvey("Risk Assessment")
     pages = survey.pages(10, on_submit=lambda: st.info("Thank you for your responses!"))
     with pages:
@@ -100,22 +101,22 @@ if st.session_state["__streamlit-survey-data_Risk Assessment_Pages__btn_submit"]
     
     # Interpretation of the total score
     if total_score >= 15:
-        response_text += "**Interpretation: High vulnerability to unauthorized GenAI use.**\n"
+        response_text += "**Interpretation: High vulnerability to unauthorized Generative AI use.**\n"
     elif 10 <= total_score < 15:
-        response_text += "**Interpretation: Moderate vulnerability to unauthorized GenAI use.**\n"
+        response_text += "**Interpretation: Moderate vulnerability to unauthorized Generative AI use.**\n"
     elif 5 <= total_score < 10:
-        response_text += "**Interpretation: Low vulnerability to unauthorized GenAI use.**\n"
+        response_text += "**Interpretation: Low vulnerability to unauthorized Generative AI use.**\n"
     else:
-        response_text += "**Interpretation: Minimal vulnerability to unauthorized GenAI use.**\n"
+        response_text += "**Interpretation: Minimal vulnerability to unauthorized Generative AI use.**\n"
     
     # Scorecard interpretation
     response_text += """
     **Scorecard Interpretation**
     
-    - 0-4: Minimal vulnerability to unauthorized GenAI use.
-    - 5-9: Low vulnerability to unauthorized GenAI use.
-    - 10-14: Moderate vulnerability to unauthorized GenAI use.
-    - 15-18: High vulnerability to unauthorized GenAI use.
+    - 0-4: Minimal vulnerability to unauthorized Generative AI use.
+    - 5-9: Low vulnerability to unauthorized Generative AI use.
+    - 10-14: Moderate vulnerability to unauthorized Generative AI use.
+    - 15-18: High vulnerability to unauthorized Generative AI use.
     """
     
     st.info(response_text)
