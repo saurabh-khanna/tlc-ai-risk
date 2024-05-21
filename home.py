@@ -2,6 +2,17 @@ import streamlit as st
 import streamlit_survey as ss
 from datetime import datetime
 
+st.set_page_config(page_icon="🔬", page_title="TLC genAI Risk Assessment")
+
+hide_st_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_st_style, unsafe_allow_html=True)
+
 survey = ss.StreamlitSurvey()
 
 if '__streamlit-survey-data_Risk Assessment_Pages__btn_submit' not in st.session_state:
