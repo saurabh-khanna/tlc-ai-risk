@@ -11,7 +11,7 @@ st.title("TLC genAI Risk Assessment")
 
 st.sidebar.title("TLC genAI Risk Assessment")
 st.sidebar.info("""
-                The **TLC genAI Risk Assessment** application is maintained by the TLC-FMG AI Team. Please reach out to [tlc-fmg@uva.nl](mailto:tlc-fmg@uva.nl) with feedback and/or questions.
+                The **TLC genAI Risk Assessment** application is maintained by the TLC-FMG AI Team at the University of Amsterdam. Please reach out to [tlc-fmg@uva.nl](mailto:tlc-fmg@uva.nl) with feedback and/or questions.
                 \n\n
                 We not save any identifiable information. Our code base is public [here](https://github.com/saurabh-khanna/tlc-ai-risk).
                 """)
