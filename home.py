@@ -18,13 +18,12 @@ survey = ss.StreamlitSurvey()
 if '__streamlit-survey-data_Risk Assessment_Pages__btn_submit' not in st.session_state:
     st.session_state['__streamlit-survey-data_Risk Assessment_Pages__btn_submit'] = False
 
-st.title("TLC genAI Risk Assessment")
-
-st.sidebar.title("TLC genAI Risk Assessment")
+st.title("🔬 TLC genAI Risk Assessment")
+st.sidebar.title("🔬 TLC genAI Risk Assessment")
 st.sidebar.info("""
                 The **TLC genAI Risk Assessment** application is maintained by the TLC-FMG AI Team at the University of Amsterdam. Please reach out to [tlc-fmg@uva.nl](mailto:tlc-fmg@uva.nl) with feedback and/or questions.
                 \n\n
-                We not save any identifiable information. Our code base is public [here](https://github.com/saurabh-khanna/tlc-ai-risk).
+                We do not save any identifiable information. Our code base is public [here](https://github.com/saurabh-khanna/tlc-ai-risk).
                 """)
 
 st.write("&nbsp;")
@@ -49,6 +48,22 @@ def calculate_score(responses):
     }
     total_score = sum(score_mapping[q][responses[q]['value']] for q in score_mapping if q in responses)
     return total_score
+
+def get_feedback(responses):
+    feedback = ""
+    if responses["q1"]["value"] in ["Yes, entirely", "Mostly"]:
+        feedback += "- Consider incorporating more supervised assessments or in-person exams to mitigate risks associated with unsupervised assignments.\n\n"
+    if responses["q2"]["value"] in ["More than 75%", "50% to 75%"]:
+        feedback += "- Diversify assessment methods to include a mix of supervised and unsupervised components.\n\n"
+    if responses["q3"]["value"] in ["No, not at all", "Rarely"]:
+        feedback += "- Implement regular checkpoints or progress submissions to monitor student progress more closely.\n\n"
+    if responses["q4"]["value"] in ["No, generic knowledge is sufficient", "Somewhat"]:
+        feedback += "- Design assignments that require specific knowledge or skills unique to the course, making it harder for AI to generate satisfactory responses.\n\n"
+    if responses["q5"]["value"] in ["Yes, very easily", "Possibly, with effort"]:
+        feedback += "- Revise assignments to include more analytical, critical thinking, or creative tasks that are less susceptible to AI generation.\n\n"
+    if responses["q6"]["value"] in ["No policy at all", "Vague or informal policy"]:
+        feedback += "- Establish a clear and enforced policy on the use of generative AI in coursework to set expectations and consequences for misuse.\n\n"
+    return feedback
 
 with st.expander("TLC genAI Risk Assessment", expanded=True):
     st.write("&nbsp;")
@@ -129,6 +144,9 @@ if st.session_state["__streamlit-survey-data_Risk Assessment_Pages__btn_submit"]
     - 10-14: Moderate vulnerability to unauthorized Generative AI use.
     - 15-18: High vulnerability to unauthorized Generative AI use.
     """
-    
+
+    # Adding tailored feedback
+    response_text += f"\n### Tailored Feedback\n\n{get_feedback(responses)}"
+
     st.info(response_text)
-    st.download_button("Download your report", data = response_text, file_name = "TLC_genAI_Risk_Assessment_Report.txt")
+    st.download_button("Download your report", data=response_text, file_name="TLC_genAI_Risk_Assessment_Report.txt")
