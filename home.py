@@ -31,10 +31,10 @@ st.write("&nbsp;")
 questions = {
     "q1": "Is the final course grade determined by unsupervised written assignments?",
     "q2": "What percentage of the final grade is determined by unsupervised assignments?",
-    "q3": "Do the assignments allow the lecturer to monitor the student's progression?",
+    "q3": "Do the assignments allow you to monitor students' progression towards a learning objective?",
     "q4": "Do the assignments require course-specific knowledge or skills?",
     "q5": "Can Generative AI produce passing results for the assignments?",
-    "q6": "Is there a clear policy on student use of GenAI in the course?"
+    "q6": "Is there a clear policy on student use of Generative AI in the course?"
 }
 
 def calculate_score(responses):
@@ -44,7 +44,7 @@ def calculate_score(responses):
         "q3": {"No, not at all": 3, "Rarely": 2, "Sometimes": 1, "Yes, always": 0},
         "q4": {"No, generic knowledge is sufficient": 3, "Somewhat": 2, "Mostly": 1, "Yes, completely": 0},
         "q5": {"Yes, very easily": 3, "Possibly, with effort": 2, "Unlikely": 1, "No, not possible": 0},
-        "q6": {"No policy at all": 3, "Vague or informal policy": 2, "Clear but not enforced": 1, "Clear and enforced policy": 0}
+        "q6": {"No policy at all": 3, "Vague or informal policy": 2, "Clear but not applied": 1, "Clear and applied policy": 0}
     }
     total_score = sum(score_mapping[q][responses[q]['value']] for q in score_mapping if q in responses)
     return total_score
@@ -62,7 +62,7 @@ def get_feedback(responses):
     if responses["q5"]["value"] in ["Yes, very easily", "Possibly, with effort"]:
         feedback += "- Revise assignments to include more analytical, critical thinking, or creative tasks that are less susceptible to AI generation.\n\n"
     if responses["q6"]["value"] in ["No policy at all", "Vague or informal policy"]:
-        feedback += "- Establish a clear and enforced policy on the use of generative AI in coursework to set expectations and consequences for misuse.\n\n"
+        feedback += "- Establish a clear and applied policy on the use of generative AI in coursework to set expectations and consequences for misuse.\n\n"
     return feedback
 
 with st.expander("TLC genAI Risk Assessment", expanded=True):
@@ -105,7 +105,7 @@ with st.expander("TLC genAI Risk Assessment", expanded=True):
             survey.radio(questions["q5"], options=["Yes, very easily", "Possibly, with effort", "Unlikely", "No, not possible"], label_visibility="collapsed", id="q5")
         elif pages.current == 8:
             st.write(questions["q6"])
-            survey.radio(questions["q6"], options=["No policy at all", "Vague or informal policy", "Clear but not enforced", "Clear and enforced policy"], label_visibility="collapsed", id="q6")
+            survey.radio(questions["q6"], options=["No policy at all", "Vague or informal policy", "Clear but not applied", "Clear and applied policy"], label_visibility="collapsed", id="q6")
         elif pages.current == 9:
             st.write("Please provide any additional comments or suggestions on how to minimize unauthorized GenAI use in assessments.")
             survey.text_area("Please provide any additional comments or suggestions on how to minimize unauthorized GenAI use in assessments.", value="", label_visibility="collapsed", id="q7")
